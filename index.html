@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CETAA | College of Engineering Trivandrum Alumni</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    
+    <style>
+        /* --- DESIGN TOKENS --- */
+        :root {
+            --primary: #1e3a8a;       /* CET Deep Blue */
+            --primary-hover: #1e40af;
+            --dark: #0f172a;
+            --light: #f8fafc;
+            --gray: #64748b;
+            --gold: #d97706;          /* Jubilee Gold */
+            --white: #ffffff;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --transition: all 0.3s ease;
+        }
+
+        /* --- GLOBAL STYLES --- */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background-color: var(--light); color: var(--dark); line-height: 1.6; }
+        a { text-decoration: none; color: inherit; }
+
+        /* --- NAVIGATION --- */
+        nav {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 1rem 5%; background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px); position: sticky; top: 0; z-index: 100;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+        .logo { 
+            display: flex; align-items: center; gap: 10px;
+            font-size: 1.5rem; font-weight: 800; color: var(--primary); letter-spacing: -0.5px; 
+        }
+        .logo img { height: 45px; } /* Official Logo Sizing */
+        
+        .nav-links { display: flex; gap: 2rem; font-weight: 600; }
+        .nav-links a:hover { color: var(--primary); transition: var(--transition); }
+        .btn {
+            background: var(--primary); color: var(--white);
+            padding: 0.6rem 1.5rem; border-radius: 50px; font-weight: 600;
+            transition: var(--transition); border: none; cursor: pointer;
+        }
+        .btn:hover { background: var(--primary-hover); transform: translateY(-2px); }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            height: 85vh; min-height: 550px;
+            /* Using a classic engineering/architecture background to simulate the campus */
+            background: linear-gradient(to right, rgba(15, 23, 42, 0.9), rgba(15, 23, 42, 0.5)), 
+                        url('https://images.unsplash.com/photo-1541339907198-e08756dedf3f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') center/cover;
+            display: flex; flex-direction: column; justify-content: center;
+            padding: 0 5%; color: var(--white);
+        }
+        .hero h1 { font-size: 4rem; line-height: 1.1; margin-bottom: 1rem; max-width: 800px; letter-spacing: -1px; }
+        .hero p { font-size: 1.2rem; margin-bottom: 2rem; max-width: 600px; color: #cbd5e1; }
+        
+        /* --- FLASHY BUTTON (DIAMOND JUBILEE) --- */
+        .flashy-btn {
+            display: inline-block;
+            background: linear-gradient(45deg, #fbbf24, #d97706, #fbbf24);
+            background-size: 200% 200%;
+            color: var(--dark) !important;
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            font-weight: 800;
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 0 15px rgba(217, 119, 6, 0.5);
+            border: 2px solid #fff;
+            animation: gradient-shift 3s ease infinite, pulse-glow 2s infinite;
+            transition: transform 0.2s ease;
+        }
+        .flashy-btn:hover {
+            transform: scale(1.05) translateY(-3px);
+            cursor: pointer;
+        }
+
+        /* Animations for the flashy button */
+        @keyframes gradient-shift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        @keyframes pulse-glow {
+            0% { box-shadow: 0 0 15px rgba(217, 119, 6, 0.5); }
+            50% { box-shadow: 0 0 30px rgba(217, 119, 6, 0.9); }
+            100% { box-shadow: 0 0 15px rgba(217, 119, 6, 0.5); }
+        }
+
+        /* --- STATS BANNER --- */
+        .stats {
+            display: flex; justify-content: space-around; flex-wrap: wrap;
+            background: var(--white); padding: 3rem 5%; box-shadow: var(--shadow);
+            margin: -3rem 5% 4rem 5%; border-radius: 12px; position: relative; z-index: 10;
+        }
+        .stat-item { text-align: center; }
+        .stat-item h3 { font-size: 2.5rem; color: var(--primary); font-weight: 800; }
+        .stat-item p { color: var(--gray); font-weight: 600; text-transform: uppercase; font-size: 0.85rem; letter-spacing: 1px; }
+
+        /* --- CONTENT SECTION (CARDS) --- */
+        .section-title { text-align: center; margin-bottom: 3rem; font-size: 2.5rem; font-weight: 800; letter-spacing: -0.5px;}
+        .features { padding: 2rem 5% 5rem; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
+        
+        .card {
+            background: var(--white); border-radius: 16px; padding: 2rem;
+            box-shadow: var(--shadow); transition: var(--transition); border: 1px solid #e2e8f0;
+        }
+        .card:hover { transform: translateY(-10px); box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1); }
+        .card-icon { 
+            width: 50px; height: 50px; background: #e0e7ff; color: var(--primary); 
+            border-radius: 12px; display: flex; align-items: center; justify-content: center; 
+            font-size: 1.5rem; font-weight: bold; margin-bottom: 1.5rem;
+        }
+        .card h3 { margin-bottom: 1rem; font-size: 1.25rem; }
+        .card p { color: var(--gray); font-size: 0.95rem; margin-bottom: 1.5rem; }
+        .card a { color: var(--primary); font-weight: 600; font-size: 0.9rem; display: inline-flex; align-items: center; gap: 0.5rem; }
+        .card a:hover { color: var(--primary-hover); text-decoration: underline; }
+
+        /* --- FOOTER --- */
+        footer { background: var(--dark); color: var(--white); text-align: center; padding: 3rem 5%; margin-top: 2rem; }
+        footer img { height: 60px; filter: grayscale(100%) brightness(200%); margin-bottom: 1rem; }
+        footer p { color: #94a3b8; font-size: 0.9rem; }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="logo">
+            <!-- Official CET Logo from Wikimedia -->
+            <img src="https://upload.wikimedia.org/wikipedia/commons/4/4d/College_of_Engineering_Trivandrum_logo.png" alt="CET Logo">
+            CETAA
+        </div>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="#">Chapters</a>
+            <a href="#">Events</a>
+            <a href="#">Gallery</a>
+        </div>
+        <button class="btn">Alumni Login</button>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1>Karma jyāyohyakarmaņah.<br>Action is superior to inaction.</h1>
+        <p>Welcome to the official global network of the College of Engineering Trivandrum. Reconnect with batchmates, support your alma mater, and leave a lasting legacy.</p>
+        
+        <div>
+            <!-- THE FLASHY BUTTON LINKING TO RENOVATION PAGE -->
+            <a href="renovation.html" class="flashy-btn">✦ Diamond Jubilee Hall Renovation ✦</a>
+        </div>
+    </section>
+
+    <!-- Floating Stats Banner -->
+    <section class="stats">
+        <div class="stat-item">
+            <h3>1939</h3>
+            <p>Year Established</p>
+        </div>
+        <div class="stat-item">
+            <h3>50,000+</h3>
+            <p>Global Alumni</p>
+        </div>
+        <div class="stat-item">
+            <h3>13</h3>
+            <p>Active Chapters</p>
+        </div>
+    </section>
+
+    <!-- Interactive Grid Features -->
+    <section class="features">
+        <h2 class="section-title">CETAA Initiatives</h2>
+        <div class="grid">
+            
+            <div class="card">
+                <div class="card-icon">📰</div>
+                <h3>Smrithi & Events</h3>
+                <p>Stay updated on our flagship annual events, regional chapter meetups, and grand reunions happening across the globe.</p>
+                <a href="#">View Calendar &rarr;</a>
+            </div>
+
+            <div class="card">
+                <div class="card-icon">💡</div>
+                <h3>Mentorship Hub</h3>
+                <p>Give back by guiding the next generation of CETians, or find a seasoned industry veteran to help navigate your career.</p>
+                <a href="#">Find a Mentor &rarr;</a>
+            </div>
+
+            <div class="card">
+                <div class="card-icon">🏛️</div>
+                <h3>Give Back to CET</h3>
+                <p>Support infrastructure development, student scholarships, and research grants to keep CET at the forefront of engineering.</p>
+                <a href="renovation.html">View Projects &rarr;</a>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/4/4d/College_of_Engineering_Trivandrum_logo.png" alt="CET Logo">
+        <h3>College of Engineering Trivandrum Alumni Association</h3>
+        <p>Copyright © 2026 | Driven by the global CETian community.</p>
+    </footer>
+
+</body>
+</html>

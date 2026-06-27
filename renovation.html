@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diamond Jubilee Hall Renovation | Alumni</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* --- DESIGN TOKENS --- */
+        :root {
+            --primary: #2563eb;
+            --primary-hover: #1d4ed8;
+            --dark: #0f172a;
+            --light: #f8fafc;
+            --gray: #64748b;
+            --gold: #d97706; /* Added Gold for the Jubilee theme */
+            --white: #ffffff;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --transition: all 0.3s ease;
+        }
+
+        /* --- GLOBAL --- */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background-color: var(--light); color: var(--dark); line-height: 1.6; }
+        a { text-decoration: none; color: inherit; }
+
+        /* --- NAVIGATION --- */
+        nav {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 1.5rem 5%; background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px); position: sticky; top: 0; z-index: 100;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+        .logo { font-size: 1.5rem; font-weight: 700; color: var(--primary); letter-spacing: -0.5px; }
+        .nav-links { display: flex; gap: 2rem; font-weight: 600; }
+        .nav-links a:hover { color: var(--primary); transition: var(--transition); }
+        .btn {
+            background: var(--primary); color: var(--white);
+            padding: 0.6rem 1.5rem; border-radius: 50px; font-weight: 600;
+            transition: var(--transition); border: none; cursor: pointer;
+        }
+        .btn:hover { background: var(--primary-hover); transform: translateY(-2px); }
+
+        /* --- CAMPAIGN HERO --- */
+        .campaign-hero {
+            height: 60vh; min-height: 400px;
+            background: linear-gradient(to right, rgba(15, 23, 42, 0.95), rgba(15, 23, 42, 0.6)), 
+                        url('https://images.unsplash.com/photo-1507676184212-d0330a15233c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') center/cover;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            text-align: center; padding: 0 5%; color: var(--white);
+        }
+        .badge { background: var(--gold); color: white; padding: 0.4rem 1rem; border-radius: 50px; font-weight: 700; font-size: 0.85rem; text-transform: uppercase; margin-bottom: 1rem; letter-spacing: 1px; }
+        .campaign-hero h1 { font-size: 3.5rem; line-height: 1.1; margin-bottom: 1rem; max-width: 900px; letter-spacing: -1px; }
+        .campaign-hero p { font-size: 1.2rem; max-width: 700px; color: #cbd5e1; }
+
+        /* --- PROGRESS TRACKER --- */
+        .progress-section {
+            background: var(--white); padding: 3rem 5%; box-shadow: var(--shadow);
+            margin: -3rem 5% 4rem 5%; border-radius: 12px; position: relative; z-index: 10;
+        }
+        .progress-header { display: flex; justify-content: space-between; margin-bottom: 1rem; font-weight: 700; font-size: 1.2rem; }
+        .progress-container { width: 100%; background: #e2e8f0; border-radius: 20px; height: 24px; overflow: hidden; }
+        .progress-bar { width: 65%; background: linear-gradient(90deg, var(--primary), #60a5fa); height: 100%; border-radius: 20px; display: flex; align-items: center; justify-content: flex-end; padding-right: 10px; color: white; font-size: 0.8rem; font-weight: bold; }
+        .progress-stats { display: flex; gap: 2rem; margin-top: 1.5rem; color: var(--gray); font-size: 0.95rem; }
+        .progress-stats span { font-weight: 700; color: var(--dark); font-size: 1.1rem; }
+
+        /* --- PROJECT OVERVIEW (SPLIT LAYOUT) --- */
+        .overview { display: flex; flex-wrap: wrap; gap: 4rem; padding: 2rem 5% 5rem; align-items: center; }
+        .overview-text { flex: 1; min-width: 300px; }
+        .overview-text h2 { font-size: 2.5rem; margin-bottom: 1.5rem; letter-spacing: -0.5px; }
+        .overview-text p { margin-bottom: 1rem; font-size: 1.1rem; color: #475569; }
+        .overview-text ul { list-style: none; margin-top: 1.5rem; }
+        .overview-text li { margin-bottom: 0.8rem; padding-left: 2rem; position: relative; font-weight: 600; }
+        .overview-text li::before { content: '✓'; color: var(--primary); position: absolute; left: 0; font-weight: bold; font-size: 1.2rem; }
+        .overview-image { flex: 1; min-width: 300px; }
+        .overview-image img { width: 100%; border-radius: 16px; box-shadow: var(--shadow); }
+
+        /* --- DONATION TIERS --- */
+        .tiers-section { background: var(--dark); color: var(--white); padding: 5rem 5%; text-align: center; }
+        .tiers-section h2 { font-size: 2.5rem; margin-bottom: 1rem; }
+        .tiers-section > p { color: #94a3b8; margin-bottom: 3rem; font-size: 1.1rem; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; max-width: 1200px; margin: 0 auto; }
+        
+        .tier-card {
+            background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px; padding: 3rem 2rem; transition: var(--transition); text-align: left;
+        }
+        .tier-card:hover { transform: translateY(-10px); border-color: var(--primary); background: rgba(255, 255, 255, 0.08); }
+        .tier-card.featured { border-color: var(--gold); position: relative; }
+        .tier-card.featured::before { content: 'Most Popular'; position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: var(--gold); color: white; padding: 0.2rem 1rem; border-radius: 20px; font-size: 0.8rem; font-weight: 700; }
+        .tier-price { font-size: 2.5rem; font-weight: 700; margin: 1rem 0; color: var(--white); }
+        .tier-card h3 { color: var(--primary); font-size: 1.5rem; }
+        .tier-card.featured h3 { color: var(--gold); }
+        .tier-card p { color: #cbd5e1; margin-bottom: 2rem; font-size: 0.95rem; }
+        .tier-btn { width: 100%; display: block; text-align: center; padding: 0.8rem; border-radius: 8px; font-weight: 600; background: var(--white); color: var(--dark); transition: var(--transition); }
+        .tier-btn:hover { background: var(--primary); color: var(--white); }
+        .tier-card.featured .tier-btn { background: var(--gold); color: var(--white); }
+        .tier-card.featured .tier-btn:hover { background: #b45309; }
+
+        /* --- FOOTER --- */
+        footer { background: #020617; color: var(--white); text-align: center; padding: 3rem 5%; }
+        footer p { color: #94a3b8; font-size: 0.9rem; margin-top: 1rem; }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="logo">NexusAlumni.</div>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="#">Events</a>
+            <a href="#">Directory</a>
+            <a href="#" style="color: var(--primary);">Give Back</a>
+        </div>
+        <button class="btn">Login / Portal</button>
+    </nav>
+
+    <!-- Campaign Hero -->
+    <section class="campaign-hero">
+        <span class="badge">Legacy Project</span>
+        <h1>Restoring Our Heartbeat:<br>The Diamond Jubilee Hall</h1>
+        <p>For decades, it has been the stage for our greatest milestones. Now, we invite you to help us modernize the Jubilee Hall for the next generation of innovators.</p>
+    </section>
+
+    <!-- Progress Tracker -->
+    <section class="progress-section">
+        <div class="progress-header">
+            <span>Campaign Progress</span>
+            <span>65% Funded</span>
+        </div>
+        <div class="progress-container">
+            <div class="progress-bar">₹3.25 Cr</div>
+        </div>
+        <div class="progress-stats">
+            <div><span>Goal:</span> ₹5.00 Cr</div>
+            <div><span>Donors:</span> 412 Alumni</div>
+            <div><span>Deadline:</span> December 2026</div>
+        </div>
+    </section>
+
+    <!-- Project Overview -->
+    <section class="overview">
+        <div class="overview-text">
+            <h2>A Modern Vision for a Historic Space</h2>
+            <p>The Diamond Jubilee Hall holds the memories of thousands of graduates. As our institution grows, our facilities must evolve to meet world-class standards.</p>
+            <p>This comprehensive renovation project goes beyond aesthetics. We are completely overhauling the infrastructure to transform the hall into a premier, climate-controlled venue capable of hosting international conferences, cultural fests, and high-profile alumni events.</p>
+            
+            <ul>
+                <li><strong>Centralized Air Conditioning:</strong> Complete climate control for year-round comfort.</li>
+                <li><strong>Acoustic Overhaul:</strong> State-of-the-art soundproofing and audio systems.</li>
+                <li><strong>Ancillary Spaces:</strong> New VIP lounges, modernized green rooms, and upgraded backstage logistics.</li>
+                <li><strong>Sustainable Upgrades:</strong> Energy-efficient LED lighting and eco-friendly seating materials.</li>
+            </ul>
+        </div>
+        <div class="overview-image">
+            <!-- Architecture placeholder image -->
+            <img src="https://images.unsplash.com/photo-1588052195938-2d85bb9a8993?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Auditorium Renovation Concept">
+        </div>
+    </section>
+
+    <!-- Donation Tiers / CTA -->
+    <section class="tiers-section">
+        <h2>Leave Your Mark</h2>
+        <p>Choose a sponsorship tier to cement your legacy in the foundation of the new Diamond Jubilee Hall.</p>
+        
+        <div class="grid">
+            <!-- Tier 1 -->
+            <div class="tier-card">
+                <h3>Sponsor a Seat</h3>
+                <div class="tier-price">₹10,000</div>
+                <p>Have your name (or a loved one's) engraved on a premium brass plaque on one of the newly installed auditorium seats.</p>
+                <a href="#" class="tier-btn">Contribute Now</a>
+            </div>
+
+            <!-- Tier 2 (Featured) -->
+            <div class="tier-card featured">
+                <h3>Jubilee Patron</h3>
+                <div class="tier-price">₹1,00,000</div>
+                <p>Includes a seat plaque, lifetime priority booking for auditorium events, and recognition on the digital donor wall in the main lobby.</p>
+                <a href="#" class="tier-btn">Become a Patron</a>
+            </div>
+
+            <!-- Tier 3 -->
+            <div class="tier-card">
+                <h3>Ancillary Benefactor</h3>
+                <div class="tier-price">₹5,00,000+</div>
+                <p>Exclusive naming rights for the new VIP Lounges, Green Rooms, or Acoustic Wings. Please contact the Alumni Board for corporate matching.</p>
+                <a href="#" class="tier-btn">Contact Board</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <h2>NexusAlumni.</h2>
+        <p>Copyright © 2026 | Diamond Jubilee Renovation Initiative.</p>
+    </footer>
+
+</body>
+</html>
